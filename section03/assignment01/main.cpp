@@ -3,7 +3,6 @@
 #include <string>
 #include <vector>
 
-
 std::string fizzbuzz(int input) {
     std::string result {};
     if (input % 3 == 0) {
