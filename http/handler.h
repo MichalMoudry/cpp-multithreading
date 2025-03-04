@@ -5,7 +5,7 @@ namespace http {
     class Handler {
     public:
         Handler() = default;
-        virtual void ServeHTTP() const = 0;
+        virtual void serve_http() const = 0;
     };
 }
 #endif

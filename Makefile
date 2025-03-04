@@ -1,5 +1,5 @@
 cpp_version := c++17
-path := ./section04/lecture05
+path := ./section05/lecture01
 
 run:
 	g++ $(path)/main.cpp -std=$(cpp_version) -o ./output/main

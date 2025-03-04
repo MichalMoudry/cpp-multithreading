@@ -2,9 +2,9 @@
 #include <thread>
 #include <string>
 
-void print(std::string str) noexcept {
-    for (auto i = 0; i < 5; i++) {
-        std::cout << str[0] << str[1] << str[2] << std::endl;
+void print(const std::string str) noexcept {
+    for (const auto& ch : str) {
+        std::cout << ch;
     }
 }
 
