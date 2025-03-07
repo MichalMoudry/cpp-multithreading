@@ -10,10 +10,12 @@ std::mutex task_mutex;
 void task(const std::string& str) {
     for (auto i = 0; i < 5; i++) {
         try {
-            std::lock_guard guard(task_mutex);
+            //std::lock_guard guard(task_mutex);
+            std::unique_lock guard(task_mutex);
 
             std::cout << str[0] << str[1] << str[2] << std::endl;
-            throw std::exception();
+            //throw std::exception();
+            guard.unlock();
 
             std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
