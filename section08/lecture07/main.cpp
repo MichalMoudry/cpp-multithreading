@@ -4,26 +4,46 @@
 #include <thread>
 
 class Bank final {
-    std::mutex mut;
+    //std::mutex mut;
 public:
     void debit(const std::string& name, int amount) {
-        std::lock_guard guard {mut};
+        //std::lock_guard guard {mut};
         std::cout << "Debiting " << amount << " from " << name << std::endl;
     }
 
     void credit(const std::string& name, int amount) {
-        std::lock_guard guard {mut};
+        //std::lock_guard guard {mut};
         std::cout << "Crediting " << amount << " from " << name << std::endl;
     }
 
     void print(const std::string& name) {
-        std::lock_guard guard {mut};
+        //std::lock_guard guard {mut};
         std::cout << "Displaying account for " << name << std::endl;
     }
 };
 
-int main() {
+class BankMonitor final {
     Bank bank;
+    std::mutex mut;
+public:
+    void debit(const std::string& name, int amount) {
+        std::lock_guard guard {mut};
+        bank.debit(name, amount);
+    }
+
+    void credit(const std::string& name, int amount) {
+        std::lock_guard guard {mut};
+        bank.credit(name, amount);
+    }
+
+    void print(const std::string& name) {
+        std::lock_guard guard {mut};
+        bank.print(name);
+    }
+};
+
+int main() {
+    BankMonitor bank;
     std::thread thr([&bank] {
         bank.debit("Peter", 1'000);
         bank.credit("Paul", 1'000);
